@@ -9,6 +9,7 @@ MAX_FAIL = 10               #连续失败次数，超过这个次数则不再测
 TEST_START = 20             #测试的数字范围，从20到800，每次增加20
 TEST_STOP = 800
 TEST_SKIP = 20
+# LLM的名称。前面如果加#，表示跳过这个LLM
 TEST_MODELS = ["#gpt-4o-mini", "gpt-4o-2024-11-20", "claude-3-7-sonnet-20250219", "gemini-2.0-pro-exp-02-05", "grok-3",
     "DMXAPI-HuoShan-DeepSeek-V3", "glm-4-plus", "qwen-max-latest", "doubao-pro-128k"]
 
