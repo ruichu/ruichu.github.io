@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Information</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Visa Information</h2>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" id="e-Visa-Number" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" id="Type-of-Visa" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birth">Birth</label>
+                <input type="date" class="form-control" id="birth" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label><br>
+                <input type="radio" id="male" name="gender" value="male" required>
+								<label for="male">Male</label><br>
+
+								<input type="radio" id="female" name="gender" value="female" required>
+								<label for="female">Female</label><br>
+
+			    			<input type="radio" id="other" name="gender" value="other" required>
+			    			<label for="other">Other</label><br>
+            </div>
+            <div class="form-group">
+                <label for="passportNumber">Passport Number</label>
+                <input type="text" class="form-control" id="passportNumber" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="expirationDate">Expiration Date</label>
+                    <input type="date" class="form-control" id="expirationDate" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="issuedBy">Issued By</label>
+                    <input type="text" class="form-control" id="issuedBy" required>
+                </div>
+            </div>
+                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAAYCAYAAACldpB6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF/SURBVFhH7ZbBrcMgDIa7Sg49ZJcohy6SE9MgdZOqyiZVO4jfC4SCjU2hTQ7v1b+ElGJizGeb9AAqONCJb5RCUAheCkEheG0C4Wp66MYz3Knhj0iEUD7YA+zYQ2dm96u89kPdzjAcT2BvYWKG6dhDl410TZtECHAxsuMssB2V7eUhTBe8zMcbE9MiGcK62WAf1AB3e9ov81S1EBa5tYKtoAIE6bC+FVI4rh3SDISshJHYnM/ExkFGaoHAxVKhIoQ8AH4ObZzZZ5ieQaXPlZnj/BXe4RNXVhkCk3W3CSGNILgqMHBFKyTl/jM1QnD7bwuBkvVB0wBwCa5fDrHU89udX7eqEcIOlUCCcM95lvk+jIcNhwz3QTzA9pWwxFL0x+g1hMQx1wrBzs0vipnhDszNEbVAaGrFqCoIvs8MTCP/34DeCWmAaXlSWKEytoDgfNNLvFJ1EEJpC71GIaDPI3oH3weDnd+uBLTHMoRKrFElhP8thaAQvBSCQvBSCL8QfgDVI/LdouQUMQAAAABJRU5ErkJggg=="></img>
+								                <input type="text" class="form-control" id="my-name" required>
+            							<br>
+
+            <button type="submit" class="btn btn-primary">OK</button>
+            <button type="button" class="btn btn-secondary">Cancel</button>
+        </form>
+    </div>
+
+    <!-- 引入Bootstrap JS 和依赖的Popper.js和jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
