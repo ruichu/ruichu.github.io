@@ -1,0 +1,247 @@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White House Meeting Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .scene {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .character {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .character img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .dialogue {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .option {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .result img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        #reset {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #reset:hover {
+            background-color: #218838;
+        }
+        .mood-meter {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        .mood-item {
+            text-align: center;
+        }
+        .mood-value {
+            font-weight: bold;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene" id="mainScene">
+        <h1>White House Meeting Simulation</h1>
+        <p>You are President Zelenskyy in a crucial White House meeting with President Trump and Vice President Vance.</p>
+        
+        <div class="character">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/President_Donald_Trump_2021.jpg/220px-President_Donald_Trump_2021.jpg" alt="Trump">
+            <div class="dialogue">
+                <strong>President Trump:</strong> "You're gambling with World War III, and you're being very disrespectful to the United States!"
+            </div>
+        </div>
+
+        <div class="character">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/J.D._Vance_official_portrait.jpg/220px-J.D._Vance_official_portrait.jpg" alt="Vance">
+            <div class="dialogue">
+                <strong>Vice President Vance:</strong> "The American people are tired of funding this endless conflict. You need to consider peace talks."
+            </div>
+        </div>
+
+        <div class="mood-meter">
+            <div class="mood-item">
+                <div>Trump's Patience:</div>
+                <div class="mood-value" id="trumpMood">100%</div>
+            </div>
+            <div class="mood-item">
+                <div>Meeting Progress:</div>
+                <div class="mood-value" id="progress">0%</div>
+            </div>
+            <div class="mood-item">
+                <div>Support Level:</div>
+                <div class="mood-value" id="support">50%</div>
+            </div>
+        </div>
+
+        <div class="options" id="options">
+            <button class="option" onclick="makeChoice(1)">Firmly defend Ukraine's position: "We are fighting for democracy and freedom, not just for Ukraine but for the whole world."</button>
+            <button class="option" onclick="makeChoice(2)">Diplomatic approach: "Let's discuss how we can work together to achieve peace while protecting both our interests."</button>
+            <button class="option" onclick="makeChoice(3)">Challenge their stance: "With all due respect, abandoning Ukraine now would only embolden Russia and threaten global security."</button>
+            <button class="option" onclick="makeChoice(4)">Appeal to American values: "America has always stood with nations fighting for their freedom. This is about preserving those shared values."</button>
+        </div>
+
+        <div class="result" id="result"></div>
+        <button id="reset" onclick="resetSimulation()">Start Over</button>
+    </div>
+
+    <script>
+        let state = {
+            trumpMood: 100,
+            progress: 0,
+            support: 50,
+            round: 1
+        };
+
+        const responses = {
+            1: {
+                trump: "Trump becomes visibly agitated: 'Nobody talks about democracy more than you, but what about America First?'",
+                vance: "Vance interrupts: 'The American taxpayers have already given more than enough.'",
+                image: "https://media.npr.org/assets/img/2023/12/12/gettyimages-1825082160-e6c138831676f4f731a6a17c6e83e33b4d3a1e7c-s1100-c50.jpg",
+                trumpMood: -20,
+                progress: 10,
+                support: -5
+            },
+            2: {
+                trump: "Trump leans forward with interest: 'Now we're talking. But it has to be America's interests first.'",
+                vance: "Vance nods cautiously: 'We need concrete steps towards peace negotiations.'",
+                image: "https://media.newyorker.com/photos/63978e3c501c49c94f8c1bbd/master/w_2560%2Cc_limit/Chotiner-Zelenskyy-Congress.jpg",
+                trumpMood: 10,
+                progress: 20,
+                support: 10
+            },
+            3: {
+                trump: "Trump stands up angrily: 'That's exactly the kind of attitude that's causing problems!'",
+                vance: "Vance shakes his head: 'This is why we need to reassess our entire approach.'",
+                image: "https://www.politico.com/dims4/default/3f6f078/2147483647/strip/true/crop/1160x773+0+0/resize/1260x840!/quality/90/?url=https%3A%2F%2Fstatic.politico.com%2F14%2Fb5%2F70b9a87f41b0aeb4e3c2d81756c4%2F181126-trump-putin-gty-773.jpg",
+                trumpMood: -30,
+                progress: -10,
+                support: -15
+            },
+            4: {
+                trump: "Trump pauses thoughtfully: 'America's values are important, but so is America's wallet.'",
+                vance: "Vance responds: 'We need to balance our values with practical considerations.'",
+                image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/PIQRH3Z2QFGXDMTXVIU2GYW6KE.jpg",
+                trumpMood: 5,
+                progress: 15,
+                support: 20
+            }
+        };
+
+        function updateMoodMeter() {
+            document.getElementById('trumpMood').textContent = Math.max(0, Math.min(100, state.trumpMood)) + '%';
+            document.getElementById('progress').textContent = Math.max(0, Math.min(100, state.progress)) + '%';
+            document.getElementById('support').textContent = Math.max(0, Math.min(100, state.support)) + '%';
+        }
+
+        function makeChoice(choice) {
+            const response = responses[choice];
+            state.trumpMood += response.trumpMood;
+            state.progress += response.progress;
+            state.support += response.support;
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h3>Round ${state.round} Results:</h3>
+                <p><strong>Trump's Response:</strong> ${response.trump}</p>
+                <p><strong>Vance's Response:</strong> ${response.vance}</p>
+                <img src="${response.image}" alt="Reaction image">
+            `;
+
+            updateMoodMeter();
+            state.round++;
+
+            if (state.round > 3 || state.trumpMood <= 0 || state.progress >= 100) {
+                endSimulation();
+            }
+
+            document.getElementById('reset').style.display = 'block';
+        }
+
+        function endSimulation() {
+            const options = document.getElementById('options');
+            options.innerHTML = '';
+            
+            let endMessage = '';
+            if (state.trumpMood <= 0) {
+                endMessage = "The meeting ends abruptly as tensions reach a breaking point. Trump walks out of the Oval Office.";
+            } else if (state.progress >= 100) {
+                endMessage = "Despite the heated exchange, some common ground was found. Future discussions are planned.";
+            } else if (state.support >= 75) {
+                endMessage = "You've managed to maintain strong support while navigating this difficult conversation.";
+            } else {
+                endMessage = "The meeting concludes with mixed results. Both sides agree to continue discussions through diplomatic channels.";
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML += `<h3>Simulation Ended</h3><p>${endMessage}</p>`;
+        }
+
+        function resetSimulation() {
+            state = {
+                trumpMood: 100,
+                progress: 0,
+                support: 50,
+                round: 1
+            };
+            
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('reset').style.display = 'none';
+            document.getElementById('options').style.display = 'block';
+            updateMoodMeter();
+        }
+    </script>
+</body>
+</html>

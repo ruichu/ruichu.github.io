@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypothetical White House Debate Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="simulation-container">
+        <h1>Hypothetical White House Debate</h1>
+        <p class="scenario-description">
+            You are role-playing as President Zelenskyy in a hypothetical high-stakes meeting
+            at the White House with figures representing contrasting views on US aid to Ukraine,
+            inspired by public discourse involving Senator Vance and former President Trump.
+            Navigate the conversation by choosing your responses.
+            <br><em>(Note: This is a fictional simulation for illustrative purposes.)</em>
+        </p>
+
+        <div id="characters">
+            <div class="character" id="char-zelenskyy">
+                <img src="placeholder_zelenskyy.png" alt="Zelenskyy Avatar" class="avatar">
+                <p>President Zelenskyy (You)</p>
+            </div>
+            <div class="character" id="char-vance">
+                <img src="placeholder_vance.png" alt="Vance Avatar" class="avatar">
+                <p>Senator Vance (Fictionalized)</p>
+            </div>
+            <div class="character" id="char-trump">
+                <img src="placeholder_trump.png" alt="Trump Avatar" class="avatar">
+                <p>Former President Trump (Fictionalized)</p>
+            </div>
+        </div>
+
+        <div id="dialogue-area">
+            <p id="dialogue-text">Loading scenario...</p>
+        </div>
+
+        <div id="options-area">
+            <!-- Options will be loaded here by JavaScript -->
+        </div>
+
+        <div id="result-area">
+            <p id="result-text"></p>
+            <img id="result-image" src="" alt="Result Image" style="display: none;">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
