@@ -116,9 +116,58 @@
         </div>
     </div>
     
+    <!-- 确定按钮 -->
+    <div class="text-center mt-4 mb-5">
+        <button id="ok-button" class="btn btn-primary btn-lg">确定</button>
+    </div>
+    
+    <!-- 模态对话框 -->
+    <div class="modal fade" id="dates-modal" tabindex="-1" aria-labelledby="datesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="datesModalLabel">已选择的入学日期</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="dates-result">
+                        <!-- 这里将显示所有选择的日期 -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // 等待文档加载完成
         $(document).ready(function() {
+            // 确定按钮点击事件
+            $("#ok-button").click(function() {
+                // 收集所有日期
+                const primarySchoolDate = $("#primary-school").val() || "未选择";
+                const middleSchoolDate = $("#middle-school").val() || "未选择";
+                const highSchoolDate = $("#high-school").val() || "未选择";
+                const universityDate = $("#university").val() || "未选择";
+                const graduateSchoolDate = $("#graduate-school").val() || "未选择";
+                
+                // 构建显示内容
+                let resultHtml = `
+                    <p><strong>小学入学日期：</strong> ${primarySchoolDate}</p>
+                    <p><strong>初中入学日期：</strong> ${middleSchoolDate}</p>
+                    <p><strong>高中入学日期：</strong> ${highSchoolDate}</p>
+                    <p><strong>大学入学日期：</strong> ${universityDate}</p>
+                    <p><strong>研究生入学日期：</strong> ${graduateSchoolDate}</p>
+                `;
+                
+                // 更新模态对话框内容并显示
+                $("#dates-result").html(resultHtml);
+                const datesModal = new bootstrap.Modal(document.getElementById('dates-modal'));
+                datesModal.show();
+            });
+            
             // 1. jQuery UI Datepicker 初始化
             $("#primary-school").datepicker({
                 dateFormat: 'yy-mm-dd',
